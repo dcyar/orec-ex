@@ -9,7 +9,7 @@
     <i class="icon icon ion-ios-book-outline"></i>
     <div>
         <h4>Inicio</h4>
-        <p class="mg-b-0">Sistema de emisión y control de actas de nacimientos, matrimonios y defunciones.</p>
+        <p class="mg-b-0">Sistema de digitalización, emisión y control de actas de nacimientos, matrimonios y defunciones.</p>
     </div>
 </div>
 <!-- d-flex -->

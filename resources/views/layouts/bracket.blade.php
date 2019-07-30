@@ -16,7 +16,7 @@
     </head>
     <body>
         <!-- ########## START: LEFT PANEL ########## -->
-        <div class="br-logo"><a href="#"><span>[</span>OREC <i>MDSR</i><span>]</span></a></div>
+        <div class="br-logo"><a href="{{ route('dashboard') }}"><span>[</span>OREC <i>EX</i><span>]</span></a></div>
         @include('layouts.includes.sidebar')
         <!-- ########## END: LEFT PANEL ########## -->
 

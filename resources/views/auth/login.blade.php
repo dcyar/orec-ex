@@ -41,9 +41,9 @@
         <div class="col-md-6 bg-br-primary d-flex align-items-center justify-content-center">
             <div class="wd-250 wd-xl-450 mg-y-30">
                 <div class="signin-logo tx-28 tx-bold tx-white">
-                    <span class="tx-normal">[</span> OREC <span class="tx-info">MDSR</span> <span class="tx-normal">]</span>
+                    <span class="tx-normal">[</span> OREC <span class="tx-info">EX</span> <span class="tx-normal">]</span>
                 </div>
-                <div class="tx-white mg-b-60">Oficina de Registros del Estado Civil - MDSR</div>
+                <div class="tx-white mg-b-60">Sistema de digitalización, emisión y control de actas de nacimientos, matrimonios y defunciones.</div>
                 {{-- <h5 class="tx-white">Why bracket?</h5> --}}
                 <p class="tx-white-6">
                     <blockquote class="blockquote bd-l bd-5 pd-l-20">
