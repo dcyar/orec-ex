@@ -26,8 +26,8 @@
             </div>
             <!-- card-profile-img -->
             <h4 class="tx-normal tx-roboto tx-inverse">JhOn Al (dcyar)</h4>
-            <p class="mg-b-25">jhonal183@gmail.com</p>
             <p class="wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25">Desarrollador web, con conocimientos en Frontend, Backend, apasionado de las nuevas tecnologías en internet, amante de la música y explorador de los límites de lo desconocido.</p>
+            <p class="mg-b-25">Soporte: <strong>jhonal183@gmail.com</strong></p>
             <p class="mg-b-0 tx-24">
                 <a href="https://www.github.com/dcyar" class="tx-primary mg-r-5" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.gitlab.com/dcyar" class="tx-primary mg-r-5" target="_blank"><i class="fab fa-gitlab"></i></a>

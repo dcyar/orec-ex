@@ -10,8 +10,8 @@
         <div class="br-pagetitle">
             <i class="icon icon ion-ios-book-outline"></i>
             <div>
-                <h4>Nacimientos</h4>
-                <p class="mg-b-0">Actas de nacimiento desde 1900 hasta la fecha.</p>
+                <h4>Defuncion</h4>
+                <p class="mg-b-0">Acta de defuncion inscrita en esta OREC.</p>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="d-md-flex justify-content-between flex-row-reverse">
                 <h1 class="mg-b-0 tx-uppercase tx-gray-600 tx-mont tx-bold">{{ $rs->libro }} | {{ $rs->acta }}</h1>
                 <div class="mg-t-25 mg-md-t-0">
-                    <h6 class="tx-secondary">Fecha de Nacimiento: {{ $rs->fecha_de_registro }}</h6>
+                    <h6 class="tx-secondary">Fecha de Defunción: {{ $rs->fecha_de_registro }}</h6>
                     <h4 class="tx-primary">{{ $rs->nombres . ' ' . $rs->apellidos }}</h4>
                 </div>
             </div>

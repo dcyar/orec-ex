@@ -10,8 +10,8 @@
         <div class="br-pagetitle">
             <i class="icon icon ion-ios-book-outline"></i>
             <div>
-                <h4>Nacimientos</h4>
-                <p class="mg-b-0">Actas de nacimiento desde 1900 hasta la fecha.</p>
+                <h4>Nacimiento</h4>
+                <p class="mg-b-0">Acta de nacimiento inscrita en esta OREC.</p>
             </div>
         </div>
     </div>

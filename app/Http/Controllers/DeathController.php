@@ -64,9 +64,11 @@ class DeathController extends Controller
      * @param  \App\Models\Death  $death
      * @return \Illuminate\Http\Response
      */
-    public function show(Death $death)
+    public function show($id)
     {
-        //
+        $rs = Death::findOrFail($id);
+
+        return view('defunciones.show', compact('rs'));
     }
 
     /**

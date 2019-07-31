@@ -28,7 +28,7 @@
             <h1 class="tx-regular tx-roboto tx-inverse">OREC EX</h1>
             <p class="mg-b-25">Sistema de digitalización, emisión y control de actas de nacimientos, matrimonios y defunciones.</p>
             <hr />
-            <p class="wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25"><a href="https://gitlab.com/dcyar/orec-ex" target="_blank"><strong>OREC EX</strong></a> es un proyecto de codigo abierto (Open Source), enfocado a facilitar el proceso de digitalización y expedición de actas de nacimientos, matrimonios y defunciones.</p>
+            <p class="wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25"><a href="https://gitlab.com/dcyar/orec-ex" target="_blank"><strong>OREC EX</strong></a> es un proyecto de codigo abierto (Open Source), enfocado a facilitar el proceso de digitalización, emisión y control de actas de nacimientos, matrimonios y defunciones.</p>
             <span>Link del Proyecto:</span>
             <p class="mg-b-0 tx-24">
                 <a href="https://www.gitlab.com/dcyar/orec-ex" class="tx-primary mg-r-5" target="_blank"><i class="fab fa-gitlab"></i></a>
