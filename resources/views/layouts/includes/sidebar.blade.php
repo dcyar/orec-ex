@@ -45,6 +45,17 @@
         </li>
         <!-- br-menu-item -->
     </ul>
+</ul>
+<label class="sidebar-label pd-x-10 mg-t-25 mg-b-20 tx-info">Tramites</label>
+<ul class="br-sideleft-menu">
+    <li class="br-menu-item">
+        <a href="{{ route('solterias.index') }}" class="br-menu-link">
+            <i class="menu-item-icon icon ion-document tx-24"></i>
+            <span class="menu-item-label">Certificado de Solteria</span>
+        </a><!-- br-menu-link -->
+    </li>
+    <!-- br-menu-item -->
+</ul>
     <label class="sidebar-label pd-x-10 mg-t-25 mg-b-20 tx-info">Ayuda y Soporte</label>
     <ul class="br-sideleft-menu">
         <li class="br-menu-item">
