@@ -7,6 +7,10 @@ use App\Repositories\Contracts\SinglenessRepositoryInterface;
 use App\Repositories\EloquentSinglenessRepository;
 use App\Usescases\Singleness\Contracts\ListSinglenessUsecaseInterface;
 use App\Usescases\Singleness\ListSinglenessUsecase;
+use App\Repositories\Contracts\PhraseRepositoryInterface;
+use App\Repositories\EloquentPhraseRepository;
+use App\Usescases\Phrase\Contracts\RandomPhraseUsecaseInterface;
+use App\Usescases\Phrase\RandomPhraseUsecase;
 
 class ContractsServiceProvider extends ServiceProvider
 {
@@ -28,9 +32,11 @@ class ContractsServiceProvider extends ServiceProvider
     public $bindings = [
         // Repositories
         SinglenessRepositoryInterface::class => EloquentSinglenessRepository::class,
+        PhraseRepositoryInterface::class => EloquentPhraseRepository::class,
     
         //Usecases
         ListSinglenessUsecaseInterface::class => ListSinglenessUsecase::class,
+        RandomPhraseUsecaseInterface::class => RandomPhraseUsecase::class,
     
         //Services
 

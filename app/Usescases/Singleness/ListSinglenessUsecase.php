@@ -11,15 +11,15 @@ class ListSinglenessUsecase implements ListSinglenessUsecaseInterface
      *
      * @var SinglenessRepositoryInterface
      */
-    private $singlenesRepository;
+    private $singlenessRepository;
 
     /**
      *
-     * @param SinglenessRepositoryInterface $singlenesRepository
+     * @param SinglenessRepositoryInterface $singlenessRepository
      */
-    public function __construct(SinglenessRepositoryInterface $singlenesRepository)
+    public function __construct(SinglenessRepositoryInterface $singlenessRepository)
     {
-        $this->singlenesRepository = $singlenesRepository;
+        $this->singlenessRepository = $singlenessRepository;
     }
 
     /**
@@ -28,6 +28,6 @@ class ListSinglenessUsecase implements ListSinglenessUsecaseInterface
      */
     public function handle()
     {
-        return $this->singlenesRepository->all();
+        return $this->singlenessRepository->all();
     }
 }
