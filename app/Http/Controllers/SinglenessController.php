@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Singleness;
+use App\Usescases\Singleness\Contracts\ListSinglenessUsecaseInterface;
 
 class SinglenessController extends Controller
 {
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ListSinglenessUsecaseInterface $listSinglenessUsecase
+     * @return void
      */
-    public function index()
+    public function index(ListSinglenessUsecaseInterface $listSinglenessUsecase)
     {
-        $singlenesses = Singleness::latest()->take(10)->get();
+        $singlenesses = $listSinglenessUsecase->handle();
 
         return view('solterias.index', compact('singlenesses'));
     }
