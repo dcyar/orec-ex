@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marriage;
+use App\Entities\Marriage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Repositories\Contracts\MarriageRepositoryInterface;
+use App\Usescases\Marriage\Contracts\CreateMarriageUsecaseInterface;
 
 class MarriageController extends Controller
 {
+
+    private $marriageRepository, $createMarriageUsecase;
+
+    public function __construct(MarriageRepositoryInterface $marriageRepository, CreateMarriageUsecaseInterface $createMarriageUsecase)
+    {
+        $this->marriageRepository = $marriageRepository;
+        $this->createMarriageUsecase = $createMarriageUsecase;
+    }
+
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index()
     {
-        $marriages = Marriage::latest()->take(10)->get();
+        $marriages = $this->marriageRepository->getModel()->latest()->take(10)->get();
 
         return view('matrimonios.index', compact('marriages'));
     }
@@ -39,26 +47,16 @@ class MarriageController extends Controller
      */
     public function store(Request $request)
     {
-        $imageName = '/orec/matrimonios/' . Str::slug((Carbon::now(). strtolower(($request->nombres .'-'. $request->apellidos))), '-') .'.'.request()->partida->getClientOriginalExtension();
-            
-        request()->partida->move(public_path('orec/matrimonios/'), $imageName);
-        
-        $marriage = Marriage::create([
-            'libro' => $request->libro,
-            'acta' => $request->acta,
-            'nombres' => $request->nombres,
-            'apellidos' => $request->apellidos,
-            'dni' => $request->dni,
-            'nombres_esposa' => $request->nombres_esposa,
-            'apellidos_esposa' => $request->apellidos_esposa,
-            'dni_esposa' => $request->dni_esposa,
-            'fecha_de_registro' => $request->fecha_de_registro,
-            'partida' => $imageName,
-        ]);
-
-        $marriage->save();
-
-        return redirect()->back()->withMessage('El acta se guardó exitosamente...');
+        try {
+            $marriage = $this->createMarriageUsecase->handle($request);
+            session()->flash('message', 'El acta se ha guardado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error y el acta no se ha guardado!!');
+            session()->flash('flash_type', 'danger');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -67,9 +65,9 @@ class MarriageController extends Controller
      * @param  \App\Models\Marriage  $marriage
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $rs = Marriage::findOrFail($id);
+        $rs = $this->marriageRepository->show($id);
 
         return view('matrimonios.show', compact('rs'));
     }
@@ -98,13 +96,21 @@ class MarriageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Marriage  $marriage
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return void
      */
-    public function destroy(Marriage $marriage)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $this->marriageRepository->delete($id);
+            session()->flash('message', 'El acta se ha eliminado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('matrimonios.index');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error al intentar eliminar el acta!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('matrimonios.index');
+        }
     }
 }

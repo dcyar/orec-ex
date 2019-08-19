@@ -22,7 +22,7 @@ class CreateDeathsTable extends Migration
             $table->string('apellidos', 150);
             $table->string('dni', 8)->nullable();
             $table->date('fecha_de_registro');
-            $table->string('partida', 250);
+            $table->string('partida', 250)->nullable();
 
             $table->timestamps();
         });

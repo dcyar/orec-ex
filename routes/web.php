@@ -21,9 +21,9 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::group(['middleware' => 'auth'], function () {
     /** Ruta de Actas */
     Route::group(['prefix' => 'actas'], function () {
-        Route::resource('nacimientos', 'BirthController');
-        Route::resource('matrimonios', 'MarriageController');
-        Route::resource('defunciones', 'DeathController');
+        Route::resource('nacimientos', 'BirthController')->except(['create']);
+        Route::resource('matrimonios', 'MarriageController')->except(['create']);
+        Route::resource('defunciones', 'DeathController')->except(['create']);
     
         /** Rutas de Descarga de Actas */
         Route::get('download/nac/{id}/{format}', 'PdfDownloadController@birthDownload')->name('birth.download');

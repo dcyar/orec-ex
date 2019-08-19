@@ -3,28 +3,19 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Contracts\SinglenessRepositoryInterface;
-use App\Repositories\EloquentSinglenessRepository;
-use App\Usescases\Singleness\Contracts\ListSinglenessUsecaseInterface;
+use App\Usescases\Birth\CreateBirthUsecase;
+use App\Usescases\Death\CreateDeathUsecase;
+use App\Repositories\{EloquentBirthRepository, EloquentPhraseRepository, EloquentDeathRepository, EloquentMarriageRepository, EloquentSinglenessRepository};
+use App\Repositories\Contracts\{BirthRepositoryInterface, PhraseRepositoryInterface, DeathRepositoryInterface, MarriageRepositoryInterface, SinglenessRepositoryInterface};
+use App\Usescases\Birth\Contracts\CreateBirthUsecaseInterface;
+use App\Usescases\Death\Contracts\CreateDeathUsecaseInterface;
+use App\Usescases\Marriage\Contracts\CreateMarriageUsecaseInterface;
+use App\Usescases\Marriage\CreateMarriageUsecase;
 use App\Usescases\Singleness\ListSinglenessUsecase;
-use App\Repositories\Contracts\PhraseRepositoryInterface;
-use App\Repositories\EloquentPhraseRepository;
-use App\Usescases\Phrase\Contracts\RandomPhraseUsecaseInterface;
-use App\Usescases\Phrase\RandomPhraseUsecase;
+use App\Usescases\Singleness\Contracts\ListSinglenessUsecaseInterface;
 
 class ContractsServiceProvider extends ServiceProvider
-{
-
-    // protected $classes = [
-    //     // Repositories
-    //     SinglenessRepositoryInterface::class => EloquentSinglenessRepository::class,
-
-    //     //Usecases
-    //     ListSinglenessUsecaseInterface::class => ListSinglenessUsecase::class,
-
-    //     //Services
-    // ];
-    
+{    
     /**
      *
      * @var array
@@ -33,10 +24,16 @@ class ContractsServiceProvider extends ServiceProvider
         // Repositories
         SinglenessRepositoryInterface::class => EloquentSinglenessRepository::class,
         PhraseRepositoryInterface::class => EloquentPhraseRepository::class,
+        BirthRepositoryInterface::class => EloquentBirthRepository::class,
+        DeathRepositoryInterface::class => EloquentDeathRepository::class,
+        MarriageRepositoryInterface::class => EloquentMarriageRepository::class,
     
         //Usecases
         ListSinglenessUsecaseInterface::class => ListSinglenessUsecase::class,
-        RandomPhraseUsecaseInterface::class => RandomPhraseUsecase::class,
+        CreateBirthUsecaseInterface::class => CreateBirthUsecase::class,
+        CreateDeathUsecaseInterface::class => CreateDeathUsecase::class,
+        CreateMarriageUsecaseInterface::class => CreateMarriageUsecase::class,
+        // RandomPhraseUsecaseInterface::class => RandomPhraseUsecase::class,
     
         //Services
 
@@ -49,9 +46,7 @@ class ContractsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // foreach ($this->classes as $interface => $implementation) {
-        //     $this->app->bind($interface, $implementation);
-        // }
+        //
     }
 
     /**

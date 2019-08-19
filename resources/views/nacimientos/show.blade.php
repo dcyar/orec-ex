@@ -18,11 +18,24 @@
     <!-- btn-group -->
     <div class="mg-l-auto hidden-xs-down">
         <a href="{{ route('birth.download', [$rs->id, '1']) }}" class="btn btn-teal" target="_blank">Imprimir en Formato</a>
-        <a href="{{ route('birth.download', [$rs->id, '2']) }}" class="btn btn-indigo" target="_blank">Imprimir Normal</a>
+        <a href="{{ route('birth.download', [$rs->id, '2']) }}" class="btn btn-indigo" target="_blank">Imprimir A4</a>
+        <div class="btn-group ml-3" role="group" aria-label="Actions">
+            <a href="{{ route('nacimientos.edit', $rs->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+
+            @include('includes.delete-form', ['route' => 'nacimientos.destroy', 'id' => $rs->id])
+        </div>
     </div>
 </div>
 <!-- d-flex -->
 <div class="br-pagebody">
+    @if (Session::has('message'))
+        <div class="alert alert-bordered alert-{{ Session::get('flash_type') }}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <strong class="d-block d-sm-inline-block-force">{{Session::get('message') }}</strong>
+        </div>
+    @endif
     <div class="card bd-0 shadow-base">
         <div class="card-body pd-30 pd-md-60">
             <div class="d-md-flex justify-content-between flex-row-reverse">

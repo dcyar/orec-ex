@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-use App\Usescases\Phrase\Contracts\RandomPhraseUsecaseInterface;
+use App\Repositories\Contracts\PhraseRepositoryInterface;
 
 class LoginController extends Controller
 {
@@ -40,13 +39,13 @@ class LoginController extends Controller
     }
 
     /**
-     * Show the application's login form.
      *
-     * @return \Illuminate\Http\Response
+     * @param PhraseRepositoryInterface $phraseRepository
+     * @return void
      */
-    public function showLoginForm(RandomPhraseUsecaseInterface $randomPhraseUsecase)
+    public function showLoginForm(PhraseRepositoryInterface $phraseRepository)
     {
-        $phrase = $randomPhraseUsecase->handle()->first();
+        $phrase = $phraseRepository->getModel()->inRandomOrder()->first();
         
         return view('auth.login', ['phrase' => $phrase]);
     }

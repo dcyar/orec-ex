@@ -31,7 +31,7 @@
 
             <footer class="br-footer bg-gray-300">
                 <div class="footer-left">
-                    <div class="mg-b-2">Copyright © 2019. <strong>OREC EX</strong>. Todos los derechos reservados.</div>
+                    <div class="mg-b-2">Copyright © 2019. <strong><a href="https://www.github.com/dcyar/orec-ex" target="_blank">OREC EX</a></strong>. Todos los derechos reservados.</div>
                 </div>
                 <div class="footer-right d-flex align-items-center">
                     <div>Hecho por <a href="http://www.facebook.com/dcyar444" target="_blank"><strong>JhOn Al</strong></a></div>

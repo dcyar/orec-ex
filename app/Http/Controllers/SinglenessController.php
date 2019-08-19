@@ -7,14 +7,20 @@ use App\Usescases\Singleness\Contracts\ListSinglenessUsecaseInterface;
 
 class SinglenessController extends Controller
 {
+    private $listSinglenessUsecase;
+
+    public function __construct(ListSinglenessUsecaseInterface $listSinglenessUsecase)
+    {
+        $this->listSinglenessUsecase = $listSinglenessUsecase;
+    }
+
     /**
      *
-     * @param ListSinglenessUsecaseInterface $listSinglenessUsecase
      * @return void
      */
-    public function index(ListSinglenessUsecaseInterface $listSinglenessUsecase)
+    public function index()
     {
-        $singlenesses = $listSinglenessUsecase->handle();
+        $singlenesses = $this->listSinglenessUsecase->handle();
 
         return view('solterias.index', compact('singlenesses'));
     }

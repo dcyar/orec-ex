@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Searchable\Search;
 
-use App\Models\Birth;
-use App\Models\Marriage;
-use App\Models\Death;
+use App\Entities\Birth;
+use App\Entities\Marriage;
+use App\Entities\Death;
 
 class SearchController extends Controller
 {

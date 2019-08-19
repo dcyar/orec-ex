@@ -17,7 +17,6 @@
     </div>
     <!-- btn-group -->
     <div class="mg-l-auto hidden-xs-down">
-        <a href="{{ URL::previous() }}" class="btn btn-info">Atras</a>
         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#nuevaActa">Nueva Acta</a>
     </div>
 </div>
@@ -26,11 +25,11 @@
     <!-- start you own content here -->
     <div class="br-section-wrapper">
         @if (Session::has('message'))
-            <div class="alert alert-bordered alert-success" role="alert">
+            <div class="alert alert-bordered alert-{{ Session::get('flash_type') }}" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <strong class="d-block d-sm-inline-block-force">Felicidades!</strong> El acta se guardo correctamente
+                <strong class="d-block d-sm-inline-block-force">{{Session::get('message') }}</strong>
             </div>
         @endif
         {{-- <h6 class="br-section-label">Basic Table</h6>
@@ -48,7 +47,7 @@
                     @foreach ($births as $birth)
                         <tr>
                             <th scope="row">{{ $birth->id }}</th>
-                            <td>{{ $birth->nombres . ' ' . $birth->apellidos }}</td>
+                            <td><a href="{{ route("nacimientos.show", $birth->id) }}" target="_blank">{{ $birth->nombres . ' ' . $birth->apellidos }}</a></td>
                             <td>{{ $birth->libro . ' | ' . $birth->acta }}</td>
                         </tr>
                     @endforeach
@@ -74,37 +73,37 @@
                         <div class="row mg-b-25">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label class="form-control-label">Libro: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Libro/CUI:</label>
                                     <input class="form-control" type="text" name="libro" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label class="form-control-label">Acta: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Acta:</label>
                                     <input class="form-control" type="text" name="acta" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-control-label">Nombres: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Nombres:</label>
                                     <input class="form-control" type="text" name="nombres" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Apellidos: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Apellidos:</label>
                                     <input class="form-control" type="text" name="apellidos" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">DNI: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label">DNI:</label>
                                     <input class="form-control" type="text" name="dni" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Fecha de Nacimiento: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Fecha de Nacimiento:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

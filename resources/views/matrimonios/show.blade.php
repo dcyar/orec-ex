@@ -18,7 +18,11 @@
     <!-- btn-group -->
     <div class="mg-l-auto hidden-xs-down">
         <a href="{{ route('marriage.download', [$rs->id, '1']) }}" class="btn btn-teal" target="_blank">Imprimir en Formato</a>
-        <a href="{{ route('marriage.download', [$rs->id, '2']) }}" class="btn btn-indigo" target="_blank">Imprimir Normal</a>
+        <a href="{{ route('birth.download', [$rs->id, '2']) }}" class="btn btn-indigo" target="_blank">Imprimir A4</a>
+        <div class="btn-group ml-3" role="group" aria-label="Actions">
+            <a href="#" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+            @include('includes.delete-form', ['route' => 'matrimonios.destroy', 'id' => $rs->id])
+        </div>
     </div>
 </div>
 <!-- d-flex -->

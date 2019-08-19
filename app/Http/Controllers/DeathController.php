@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Death;
+use App\Entities\Death;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Repositories\Contracts\DeathRepositoryInterface;
+use App\Usescases\Death\Contracts\CreateDeathUsecaseInterface;
 
 class DeathController extends Controller
 {
+    private $deathRepository, $createDeathUsecase;
+
+    public function __construct(DeathRepositoryInterface $deathRepository, CreateDeathUsecaseInterface $createDeathUsecase)
+    {
+        $this->deathRepository = $deathRepository;
+        $this->createDeathUsecase = $createDeathUsecase;
+    }
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index()
     {
-        $deaths = Death::latest()->take(10)->get();
+        $deaths = $this->deathRepository->getModel()->latest()->take(10)->get();
 
         return view('defunciones.index', compact('deaths'));
     }
@@ -39,69 +45,78 @@ class DeathController extends Controller
      */
     public function store(Request $request)
     {
-        $imageName = '/orec/defunciones/' . Str::slug((Carbon::now(). strtolower(($request->nombres .'-'. $request->apellidos))), '-') .'.'.request()->partida->getClientOriginalExtension();
-            
-        request()->partida->move(public_path('orec/defunciones/'), $imageName);
-
-        $death = Death::create([
-            'libro' => $request->libro,
-            'acta' => $request->acta,
-            'nombres' => $request->nombres,
-            'apellidos' => $request->apellidos,
-            'dni' => $request->dni,
-            'fecha_de_registro' => $request->fecha_de_registro,
-            'partida' => $imageName,
-        ]);
-
-        // $death->save();
-
-        return redirect()->back()->withMessage('El acta se guardó exitosamente...');
+        try {
+            $death = $this->createDeathUsecase->handle($request);
+            session()->flash('message', 'El acta se ha guardado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error y el acta no se ha guardado!!');
+            session()->flash('flash_type', 'danger');
+            return redirect()->back();
+        }
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  \App\Models\Death  $death
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return void
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $rs = Death::findOrFail($id);
+        $rs = $this->deathRepository->show($id);
 
         return view('defunciones.show', compact('rs'));
     }
 
     /**
-     * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Death  $death
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return void
      */
-    public function edit(Death $death)
+    public function edit(int $id)
     {
-        //
+        $rs = $this->deathRepository->getModel()->findOrFail($id);
+
+        return view('defunciones.edit', compact('rs'));
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Death  $death
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param integer $id
+     * @return void
      */
-    public function update(Request $request, Death $death)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $rs = $this->deathRepository->update($request, $id);
+            session()->flash('message', 'El acta se ha actualizado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('defunciones.show', $rs);
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error al intentar actualizar el acta!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('defunciones.show', $rs);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Death  $death
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return void
      */
-    public function destroy(Death $death)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $this->deathRepository->delete($id);
+            session()->flash('message', 'El acta se ha eliminado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('defunciones.index');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error al intentar eliminar el acta!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('defunciones.index');
+        }
     }
 }

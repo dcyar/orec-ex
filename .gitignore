@@ -1,9 +1,11 @@
 /node_modules
+/public/orec
 /public/hot
 /public/storage
 /public/page-cache
 /storage/*.key
 /vendor
+/.vscode
 .env
 .env.backup
 .phpunit.result.cache

@@ -17,7 +17,6 @@
     </div>
     <!-- btn-group -->
     <div class="mg-l-auto hidden-xs-down">
-        <a href="{{ URL::previous() }}" class="btn btn-info">Atras</a>
         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#nuevaActa">Nueva Acta</a>
     </div>
 </div>
@@ -26,11 +25,11 @@
     <!-- start you own content here -->
     <div class="br-section-wrapper">
         @if (Session::has('message'))
-            <div class="alert alert-bordered alert-success" role="alert">
+            <div class="alert alert-bordered alert-{{ Session::get('flash_type') }}" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <strong class="d-block d-sm-inline-block-force">Felicidades!</strong> El acta se guardo correctamente
+                <strong class="d-block d-sm-inline-block-force">{{Session::get('message') }}</strong>
             </div>
         @endif
         {{-- <h6 class="br-section-label">Basic Table</h6>
@@ -48,7 +47,7 @@
                     @foreach ($marriages as $marriage)
                         <tr>
                             <th scope="row">{{ $marriage->id }}</th>
-                            <td>{{ $marriage->nombres . ' ' . $marriage->apellidos }}</td>
+                            <td><a href="{{ route("matrimonios.show", $marriage->id) }}" target="_blank">{{ $marriage->nombres . ' ' . $marriage->apellidos }}</a></td>
                             <td>{{ $marriage->libro . ' | ' . $marriage->acta }}</td>
                         </tr>
                     @endforeach
@@ -74,19 +73,19 @@
                         <div class="row mg-b-25">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label">Libro: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Libro/CUI:</label>
                                     <input class="form-control" type="text" name="libro" autofocus required />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="form-control-label">Acta: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Acta:</label>
                                     <input class="form-control" type="text" name="acta" required />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Fecha de Matrimonio: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Fecha de Matrimonio:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -99,37 +98,37 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label class="form-control-label">Nombres Esposo: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Nombres Esposo:</label>
                                     <input class="form-control" type="text" name="nombres" required />
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Apellidos Esposo: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Apellidos Esposo:</label>
                                     <input class="form-control" type="text" name="apellidos" required />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">DNI Esposo:</label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> DNI Esposo:</label>
                                     <input class="form-control" type="text" maxlength="8" name="dni" />
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label class="form-control-label">Nombres Esposa: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Nombres Esposa:</label>
                                     <input class="form-control" type="text" name="nombres_esposa" required />
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Apellidos Esposa: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> Apellidos Esposa:</label>
                                     <input class="form-control" type="text" name="apellidos_esposa" required />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">DNI Esposa:</label>
+                                    <label class="form-control-label"><span class="tx-danger">*</span> DNI Esposa:</label>
                                     <input class="form-control" type="text" maxlength="8" name="dni_esposa" />
                                 </div>
                             </div>

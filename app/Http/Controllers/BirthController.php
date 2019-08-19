@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Birth;
+use App\Entities\Birth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Repositories\Contracts\BirthRepositoryInterface;
+use App\Usescases\Birth\Contracts\CreateBirthUsecaseInterface;
 
 class BirthController extends Controller
 {
+    private $birthRepository, $createBirthUsecase;
+
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param BirthRepositoryInterface $birthRepository
+     */
+    public function __construct(BirthRepositoryInterface $birthRepository, CreateBirthUsecaseInterface $createBirthUsecase)
+    {
+        $this->birthRepository = $birthRepository;
+        $this->createBirthUsecase = $createBirthUsecase;
+    }
+
+    /**
+     *
+     * @return void
      */
     public function index()
     {
-        $births = Birth::latest()->take(10)->get();
-
+        $births = $this->birthRepository->getModel()->latest()->take(10)->get();
         return view('nacimientos.index', compact('births'));
     }
 
@@ -39,69 +49,78 @@ class BirthController extends Controller
      */
     public function store(Request $request)
     {
-        $imageName = '/orec/nacimientos/' . Str::slug((Carbon::now(). strtolower(($request->nombres .'-'. $request->apellidos))), '-') .'.'.request()->partida->getClientOriginalExtension();
-            
-        request()->partida->move(public_path('orec/nacimientos/'), $imageName);
-
-        $birth = Birth::create([
-            'libro' => $request->libro,
-            'acta' => $request->acta,
-            'nombres' => $request->nombres,
-            'apellidos' => $request->apellidos,
-            'dni' => $request->dni,
-            'fecha_de_registro' => $request->fecha_de_registro,
-            'partida' => $imageName,
-        ]);
-
-        // $birth->save();
-
-        return redirect()->back()->withMessage('El acta se guardó exitosamente...');
+        try {
+            $birth = $this->createBirthUsecase->handle($request);
+            session()->flash('message', 'El acta se ha guardado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error y el acta no se ha guardado!!');
+            session()->flash('flash_type', 'danger');
+            return redirect()->back();
+        }
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  \App\Models\Birth  $birth
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return void
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $rs = Birth::findOrFail($id);
+        $rs = $this->birthRepository->findOrFail($id);
 
         return view('nacimientos.show', compact('rs'));
     }
 
     /**
-     * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Birth  $birth
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return void
      */
-    public function edit(Birth $birth)
+    public function edit(int $id)
     {
-        //
+        $rs = $this->birthRepository->findOrFail($id);
+
+        return view('nacimientos.edit', compact('rs'));
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Birth  $birth
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param integer $id
+     * @return void
      */
-    public function update(Request $request, Birth $birth)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $rs = $this->birthRepository->update($request, $id);
+            session()->flash('message', 'El acta se ha actualizado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('nacimientos.show', $rs);
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error al intentar actualizar el acta!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('nacimientos.show', $rs);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Birth  $birth
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return void
      */
-    public function destroy(Birth $birth)
+    public function destroy(int $id)
     {
-        //
+        try {
+            $this->birthRepository->delete($id);
+            session()->flash('message', 'El acta se ha eliminado correctamente!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('nacimientos.index');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ha ocurrido un error al intentar eliminar el acta!!');
+            session()->flash('flash_type', 'success');
+            return redirect()->route('nacimientos.index');
+        }
     }
 }

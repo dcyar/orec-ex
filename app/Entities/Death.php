@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-class Marriage extends Model implements Searchable
+class Death extends Model implements Searchable
 {
     /**
      * The attributes that are mass assignable.
@@ -14,12 +14,12 @@ class Marriage extends Model implements Searchable
      * @var array
      */
     protected $fillable = [
-        'libro', 'acta', 'nombres', 'apellidos', 'dni', 'nombres_esposa', 'apellidos_esposa', 'dni_esposa', 'fecha_de_registro', 'partida',
+        'libro', 'acta', 'nombres', 'apellidos', 'dni', 'fecha_de_registro', 'partida',
     ];
 
     public function getSearchResult(): SearchResult
     {
-        $url = route('matrimonios.show', $this->id);
+        $url = route('defunciones.show', $this->id);
 
         return new SearchResult(
             $this,
