@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Models\Phrase;
+use App\Entities\Phrase;
 
 class PhrasesTableSeeder extends Seeder
 {
