@@ -30,7 +30,7 @@ class EloquentBirthRepository implements BirthRepositoryInterface
     {
         if (request()->partida) {
             $imageName = '/orec/nacimientos/' . Str::slug((Carbon::now(). strtolower(($data->nombres .'-'. $data->apellidos))), '-') .'.'.request()->partida->getClientOriginalExtension();
-                
+
             request()->partida->move(public_path('orec/nacimientos/'), $imageName);
         }
 
@@ -71,11 +71,11 @@ class EloquentBirthRepository implements BirthRepositoryInterface
 
         if (request()->partida) {
             $imageName = '/orec/nacimientos/' . Str::slug((Carbon::now(). strtolower(($data->nombres .'-'. $data->apellidos))), '-') .'.'.request()->partida->getClientOriginalExtension();
-                
+
             request()->partida->move(public_path('orec/nacimientos/'), $imageName);
 
             $birth->partida = $imageName;
-            
+
             $birth->save();
         }
 
