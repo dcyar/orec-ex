@@ -22,7 +22,7 @@
         <!-- card-header -->
         <div class="card-body">
             <div class="card-profile-img">
-                <img src="{{ asset('bracket-plus/img/author1.jpg') }}" alt="Jhon Marco Achata Limachi" />
+                <img src="{{ asset('bracket-plus/img/author.png') }}" alt="Jhon Marco Achata Limachi" />
             </div>
             <!-- card-profile-img -->
             <h4 class="tx-normal tx-roboto tx-inverse">Jhon Achata Limachi</h4>

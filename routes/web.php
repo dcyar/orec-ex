@@ -1,5 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\BirthController;
+use App\Http\Controllers\MarriageController;
+use App\Http\Controllers\DeathController;
+use App\Http\Controllers\PdfDownloadController;
+use App\Http\Controllers\SearchController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,32 +21,32 @@
 
 Route::redirect('/', '/login');
 
-// Auth::routes();
 Auth::routes(['register' => false]);
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class,'index'])->name('dashboard');
+
 
 Route::group(['middleware' => 'auth'], function () {
     /** Ruta de Actas */
     Route::group(['prefix' => 'actas'], function () {
-        Route::resource('nacimientos', 'BirthController')->except(['create']);
-        Route::resource('matrimonios', 'MarriageController')->except(['create']);
-        Route::resource('defunciones', 'DeathController')->except(['create']);
+        Route::resource('nacimientos', BirthController::class)->except(['create']);
+        Route::resource('matrimonios', MarriageController::class)->except(['create']);
+        Route::resource('defunciones', DeathController::class)->except(['create']);
     
         /** Rutas de Descarga de Actas */
-        Route::get('download/nac/{id}/{format}', 'PdfDownloadController@birthDownload')->name('birth.download');
-        Route::get('download/mar/{id}/{format}', 'PdfDownloadController@marriageDownload')->name('marriage.download');
-        Route::get('download/dea/{id}/{format}', 'PdfDownloadController@deathDownload')->name('death.download');
+        Route::get('download/nac/{id}/{format}', [PdfDownloadController::class, 'birthDownload'])->name('birth.download');
+        Route::get('download/mar/{id}/{format}', [PdfDownloadController::class, 'marriageDownload'])->name('marriage.download');
+        Route::get('download/dea/{id}/{format}', [PdfDownloadController::class, 'deathDownload'])->name('death.download');
     });
 
     /** Rutas de Tramites */
-    Route::group(['prefix' => 'tramites'], function () {
-        Route::resource('solterias', 'SinglenessController');
-    });
+    // Route::group(['prefix' => 'tramites'], function () {
+    //     Route::resource('solterias', App\Http\Controllers\SinglenessController::class);
+    // });
     
     /** Rutas de Busqueda */
-    Route::resource('search', 'SearchController')->only(['index', 'store']);
-    Route::post('search/results', 'SearchController@results')->name('search.results');
+    Route::resource('search', SearchController::class)->only(['index', 'store']);
+    Route::post('search/results', [SearchController::class, 'results'])->name('search.results');
     
     Route::view('/sistema', 'about')->name('sistema');
     Route::view('/author', 'author')->name('autor');
