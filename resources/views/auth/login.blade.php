@@ -32,7 +32,7 @@
                     </div>
                     <!-- form-group -->
                     <button type="submit" class="btn btn-info btn-block">Ingresar</button>
-                    <div class="mg-t-60 tx-center">&copy;2019 | Todos los derechos reservados | <a href="http://www.facebook.com/dcyar444" class="tx-info tx-bold" target="_blank">JhOn Al</a></div>
+                    <div class="mg-t-60 tx-center">&copy;2021 | Todos los derechos reservados | <a href="https://www.linkedin.com/in/jhonachata/" class="tx-info tx-bold" target="_blank">Jhon Achata</a></div>
                 </form>
             </div>
             <!-- login-wrapper -->

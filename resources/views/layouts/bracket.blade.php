@@ -7,7 +7,7 @@
         <!-- Meta -->
         <meta name="description" content="Premium Quality and Responsive UI for Dashboard." />
         <meta name="author" content="ThemePixels" />
-        <title>OREC | @yield('title')</title>
+        <title>OREC EX | @yield('title')</title>
         <!-- vendor css -->
         <link href="{{ asset('bracket-plus/lib/fontawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('bracket-plus/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet" />
@@ -31,10 +31,10 @@
 
             <footer class="br-footer bg-gray-300">
                 <div class="footer-left">
-                    <div class="mg-b-2">Copyright © 2019. <strong><a href="https://www.github.com/dcyar/orec-ex" target="_blank">OREC EX</a></strong>. Todos los derechos reservados.</div>
+                    <div class="mg-b-2">Copyright © 2021. <strong><a href="https://www.github.com/dcyar/orec-ex" target="_blank">OREC EX</a></strong>. Todos los derechos reservados.</div>
                 </div>
                 <div class="footer-right d-flex align-items-center">
-                    <div>Hecho por <a href="http://www.facebook.com/dcyar444" target="_blank"><strong>JhOn Al</strong></a></div>
+                    <div>Hecho por <a href="https://www.linkedin.com/in/jhonachata/" target="_blank"><strong>Jhon Achata</strong></a></div>
                 </div>
             </footer>
         </div>

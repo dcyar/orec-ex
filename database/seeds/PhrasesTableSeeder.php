@@ -44,7 +44,7 @@ class PhrasesTableSeeder extends Seeder
     		],
 			[
     			'frase' => 'Hoy es un buen momento para decirle te quiero a las personas especiales de tu vida.',
-    			'autor' => 'JhOn Al'
+    			'autor' => 'Jhon Achata'
 			],
     	];
 
