@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
 use App\Entities\Phrase;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PhrasesTableSeeder extends Seeder
 {
@@ -49,7 +51,7 @@ class PhrasesTableSeeder extends Seeder
     	];
 
     	foreach ($phrases as $item){
-	        $phrase = Phrase::create([
+	        DB::table('phrases')->insert([
 	            'frase' => $item['frase'],
 	            'autor' => $item['autor'],
 	        ]);
